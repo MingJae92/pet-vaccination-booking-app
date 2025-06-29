@@ -12,6 +12,7 @@ interface Vaccination {
 }
 
 const VaccinationList = ({ vaccinations }: { vaccinations: Vaccination[] }) => {
+    
   return (
     <Grid container sx={gridSx}>
       {vaccinations.map((v) => (

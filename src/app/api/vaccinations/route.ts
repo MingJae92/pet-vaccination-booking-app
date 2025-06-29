@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import connectDB from '@root/lib/mongodb';
-import Vaccination from '@root/models/models';
+import Vaccination from '@root/models/vaccination';
 
 export async function GET() {
   try {

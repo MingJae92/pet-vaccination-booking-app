@@ -1,18 +1,23 @@
+// components/StatusBadge/StatusBadge.tsx
+import React from 'react';
 import { Chip } from '@mui/material';
+import { VaccinationStatus } from '@/app/page'; 
 
-const statusColors: Record<string, 'success' | 'warning' | 'error' | 'default'> = {
-  completed: 'success',
-  'due soon': 'warning',
-  overdue: 'error',
+const getColor = (status: VaccinationStatus) => {
+  switch (status) {
+    case 'completed':
+      return 'success';
+    case 'due soon':
+      return 'warning';
+    case 'overdue':
+      return 'error';
+    default:
+      return 'default';
+  }
 };
 
-const StatusBadge = ({ status }: { status?: string }) => {
-  const safeStatus = status?.toLowerCase?.() ?? '';
-  const color = statusColors[safeStatus] || 'default';
-
-  return (
-    <Chip label={status ?? 'Unknown'} color={color} size="small" />
-  );
-};
+const StatusBadge = ({ status }: { status: VaccinationStatus }) => (
+  <Chip label={status.toUpperCase()} color={getColor(status)} variant="outlined" />
+);
 
 export default StatusBadge;

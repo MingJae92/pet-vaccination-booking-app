@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Box, Paper } from '@mui/material';
+import { TextField, Paper } from '@mui/material';
 import { tableStyles } from '@/app/styles/VaccinationListStyles/VaccinationList.styles';
 
 interface SearchBoxProps {

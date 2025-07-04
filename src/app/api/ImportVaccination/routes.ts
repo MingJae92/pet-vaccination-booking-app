@@ -11,20 +11,32 @@ export async function POST() {
 
     const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
 
-    // Fetch JSON data using axios
+    // Fetch JSON data from public file
     const response = await axios.get(`${baseURL}/pet-vaccination.json`);
     const vaccinations = response.data;
 
-    // Optional: clear existing data
-    await Vaccination.deleteMany({});
+    // Optional: clear existing data (comment out if you want to keep existing)
+    // await Vaccination.deleteMany({});
 
-    // Insert new data into MongoDB
-    await Vaccination.insertMany(
+    // Use bulkWrite with upsert to insert/update without duplicates
+    await Vaccination.bulkWrite(
       vaccinations.map((v: any) => ({
-        type: v.type,
-        lastCompleted: new Date(v.lastCompleted),
-        dueDate: new Date(v.dueDate),
-        status: v.status,
+        updateOne: {
+          filter: {
+            petName: v.petName,
+            vaccinationType: v.vaccinationType,
+            lastCompletedDate: new Date(v.lastCompletedDate),
+          },
+          update: {
+            $set: {
+              petName: v.petName,
+              vaccinationType: v.vaccinationType,
+              lastCompletedDate: new Date(v.lastCompletedDate),
+              dueDate: new Date(v.dueDate),
+            },
+          },
+          upsert: true,
+        },
       }))
     );
 

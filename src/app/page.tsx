@@ -15,6 +15,7 @@ import { useDebounce } from '@/app/hooks/useDebounce';
 export type VaccinationStatus = 'completed' | 'due soon' | 'overdue';
 
 export interface Vaccination {
+  _id: string;
   id: string;
   petName: string;
   vaccinationType: string;

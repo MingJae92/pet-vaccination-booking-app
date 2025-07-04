@@ -2,12 +2,12 @@ import React from 'react';
 import { Card, CardContent, Typography, Box } from '@mui/material';
 import StatusBadge from '@/app/components/StatusBadge/StatusBadge';
 import { cardSx, badgeBoxSx } from '@/app/styles/VaccinationCardStyles/VaccinationCardStyles.styles';
-
+import { VaccinationStatus } from '@/app/page'; // Preferably move this to a shared types
 interface Props {
   type: string;
   lastCompleted: string;
   dueDate: string;
-  status: string;
+  status: VaccinationStatus;
 }
 
 const VaccinationCard = ({ type, lastCompleted, dueDate, status }: Props) => {

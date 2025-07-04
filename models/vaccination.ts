@@ -1,7 +1,6 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IVaccination extends Document {
-  id: string;
   petName: string;
   vaccinationType: string;
   lastCompletedDate: Date;
@@ -10,7 +9,6 @@ export interface IVaccination extends Document {
 
 const VaccinationSchema: Schema = new Schema(
   {
-    id: { type: String, required: true, unique: true },
     petName: { type: String, required: true },
     vaccinationType: {
       type: String,
